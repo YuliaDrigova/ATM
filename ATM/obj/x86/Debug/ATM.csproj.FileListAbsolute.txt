@@ -1,0 +1,5 @@
+C:\Users\Лулка\documents\visual studio 2010\Projects\ATM\ATM\bin\Debug\ATM.exe
+C:\Users\Лулка\documents\visual studio 2010\Projects\ATM\ATM\bin\Debug\ATM.pdb
+C:\Users\Лулка\documents\visual studio 2010\Projects\ATM\ATM\obj\x86\Debug\ATM.csprojResolveAssemblyReference.cache
+C:\Users\Лулка\documents\visual studio 2010\Projects\ATM\ATM\obj\x86\Debug\ATM.exe
+C:\Users\Лулка\documents\visual studio 2010\Projects\ATM\ATM\obj\x86\Debug\ATM.pdb

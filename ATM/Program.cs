@@ -13,14 +13,10 @@ namespace ATM
             
             loader.LoadCassettes("money.txt");
 
-            //for (int i = 0; i < loader.Cassettes.Banknotes.Count(); i++)
-            //{
-            //    Console.WriteLine(loader.Cassettes.Banknotes.ElementAt(i));
-            //}
             Console.WriteLine("Input sum that you want to get: ");
             int sum = int.Parse(Console.ReadLine());
             WithdrawMoneyAlgorithm algorithm = new WithdrawMoneyAlgorithm();
-            Atm bankomat = new Atm(algorithm);
+            Atm bankomat = new Atm();
             Money result = algorithm.Algorithm(sum, loader.Cassettes);
             if(result != null)
             foreach (KeyValuePair<Banknote, int> a in result.Banknotes)
@@ -29,12 +25,13 @@ namespace ATM
                 Console.WriteLine(a.Key.Nominal + " " + a.Value);
             }
             Console.WriteLine(algorithm.state.ToString());
-            bankomat.UpdateMoney(loader.Cassettes);
-            foreach (KeyValuePair<Banknote, int> a in loader.Cassettes.Banknotes)
+            Money r = bankomat.UpdateMoney(result, loader.Cassettes);
+            foreach (KeyValuePair<Banknote, int> a in r.Banknotes)
             {
                 Console.WriteLine(a.Key.Nominal + " " + a.Value);
             }
 
+            
             Console.ReadKey();
         }
     }

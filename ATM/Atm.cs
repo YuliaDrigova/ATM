@@ -14,13 +14,8 @@ namespace ATM
         Money Cassettes;
         WithdrawMoneyAlgorithm Algorithm;
         StatesATM state;
-        public Atm(WithdrawMoneyAlgorithm algorithm)
-        {
-            Algorithm = algorithm;
-        }
         public Money WithdrawMoney(int sum)
         {
-            Atm t = new Atm(Algorithm);
             if (Algorithm.state == StatesAlgorithm.ImpossibleSum)
             {
                 state = StatesATM.ImpossibleSum;
@@ -36,8 +31,8 @@ namespace ATM
                 state = StatesATM.Ok;
             }
                 Money withdrawMoney = Algorithm.Algorithm(sum, Cassettes);
-            if(state == StatesATM.Ok)
-                t.UpdateMoney(withdrawMoney);               
+                if (state == StatesATM.Ok)
+                    UpdateMoney(withdrawMoney, Cassettes);               
             
              return withdrawMoney;
         }
@@ -47,12 +42,14 @@ namespace ATM
             Cassettes = cassettes.Safecopy();
         }
 
-        public void UpdateMoney(Money update)
+        public Money UpdateMoney(Money update, Money cassettes)
         {
-            foreach (KeyValuePair<Banknote, int> a in update.Banknotes)
+            Dictionary<Banknote, int> updatingCassettes = new Dictionary<Banknote, int>();
+            for (int i = 0; i < cassettes.Banknotes.Count(); i++)
             {
-                Cassettes.Banknotes[a.Key] -= a.Value;
+                updatingCassettes.Add(cassettes.Banknotes.ElementAt(i).Key, cassettes.Banknotes.ElementAt(i).Value - update.Banknotes.ElementAt(i).Value);
             }
+            return new Money() { Banknotes = updatingCassettes };
         }
     }
 }
